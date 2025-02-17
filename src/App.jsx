@@ -1,41 +1,17 @@
-import React from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, useTexture } from "@react-three/drei";
+import React, { useState } from "react";
+import Gallery from "./components/Gallery";
+import ModelScene from "./components/ModelScene";
 
-function ModelWithTexture() {
-  // Load the model
-  const modal = useGLTF("/iPhone16.glb");
-
-  // Load the texture
-  const texture = useTexture("/default-texture.jpg");
+export default function App() {
+  const [selectedTexture, setSelectedTexture] = useState(null);
 
   return (
-    <primitive
-      object={modal.scene}
-    >
-      {/* Apply the texture to all children materials */}
-      {modal.scene.traverse((child) => {
-        if (child.isMesh) {
-          child.material.map = texture;
-        }
-      })}
-    </primitive>
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+      <h1 style={{ color: "black", marginBottom: "20px" }}>Select a Model Texture</h1>
+      <Gallery onSelect={(texture) => setSelectedTexture(texture)} />
+
+      {/* Display the model scene if a texture is selected */}
+      {selectedTexture && <ModelScene texturePath={selectedTexture} onClose={() => setSelectedTexture(null)} />}
+    </div>
   );
 }
-
-function App() {
-  return (
-    <Canvas
-      camera={{ position: [20,170, 100], fov: 60 }}
-      style={{ height: "100vh", width: "100%" }}
-    >
-      {/* Lighting */}
-      <ambientLight intensity={0.8} />
-      <directionalLight position={[10, 20, 15]} intensity={1} />
-      <ModelWithTexture />
-      <OrbitControls />
-    </Canvas>
-  );
-}
-
-export default App;
