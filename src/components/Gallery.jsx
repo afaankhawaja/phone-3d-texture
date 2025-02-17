@@ -7,15 +7,29 @@ export default function Gallery({ onSelect }) {
     { id: 3, img: "/texture3.jpg", texture: "/texture3.jpg" },
     { id: 4, img: "/texture4.jpg", texture: "/texture4.jpg" },
     { id: 5, img: "/texture5.jpg", texture: "/texture5.jpg" },
-    { id: 6, img: "/texture6.jpg", texture: "/texture6.jpg" }
+    { id: 6, img: "/texture6.jpg", texture: "/texture6.jpg" },
   ];
 
   return (
-    <div style={{ display: "flex", gap: "20px", justifyContent: "center", padding: "20px" }}>
+    <div className="grid grid-cols-2 grid-rows-2 gap-5 my-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 hide-scrollbar">
       {textures.map(({ id, img, texture }) => (
-        <div key={id} style={{ cursor: "pointer", textAlign: "center" }} onClick={() => onSelect(texture)}>
-          <img src={img} alt={`Texture ${id}`} style={{ width: "150px", height: "150px", borderRadius: "10px", boxShadow: "0 5px 10px rgba(0,0,0,0.3)" }} />
-          <p style={{ color: "white", marginTop: "10px"}}  >Texture {id}</p>
+        <div
+          key={id}
+          style={{ cursor: "pointer", textAlign: "center" }}
+          onClick={() => onSelect(texture)}
+        >
+          <img
+            className="h-[140px] w-[140px] md:h-[150px] md:w-[150px]  hover:scale-105 transition-all"
+            src={img}
+            alt={`Texture ${id}`}
+            style={{
+              borderRadius: "10px",
+              boxShadow: "0 5px 10px rgba(0,0,0,0.3)",
+            }}
+          />
+          <p className="text-white font-medium mt-3 hover:font-bold">
+            Texture {id}
+          </p>
         </div>
       ))}
     </div>
