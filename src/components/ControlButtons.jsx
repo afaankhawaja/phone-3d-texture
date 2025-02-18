@@ -48,8 +48,9 @@ export default function ControlButtons({ showControls, setShowControls, controlM
       </button>
 
       <button
-        className="px-3 py-1 md:px-4 md:py-2 text-xs md:text-sm flex items-center gap-2 rounded-full shadow-md bg-purple-500 hover:bg-purple-600 text-white transition"
+        className={`px-3 py-1 md:px-4 md:py-2 text-xs md:text-sm flex items-center gap-2 rounded-full shadow-md ${showControls?'bg-gray-700':'bg-purple-500 hover:bg-purple-700'} text-white transition`}
         onClick={() => setResetTrigger((prev) => prev + 1)}
+        disabled={showControls}
       >
         <FaSync />
         Reset

@@ -33,7 +33,7 @@ function ResetCamera({ resetTrigger }) {
 
   useEffect(() => {
     camera.position.set(0, 0, 100);
-    camera.lookAt(0, 0, 0);
+    camera.lookAt(0, 0, 100);
   }, [camera, resetTrigger]); 
 
   return null;
