@@ -1,26 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Gallery from "./components/Gallery";
 import ModelScene from "./components/ModelScene";
+import { FaPlus } from "react-icons/fa";
+
 import "./index.css";
+
 export default function App() {
   const [selectedTexture, setSelectedTexture] = useState(null);
 
-  return (
-    <div className="hide-scrollbar">
-      <div className="flex flex-col min-h-fit py-10 h-[100vh] items-center justify-center overflow-scroll hide-scrollbar">
-        <h1 className="max-md:text-center max-md:px-5 font-bold text-3xl mb-5">
-          Select a Model Texture
-        </h1>
-        <Gallery onSelect={(texture) => setSelectedTexture(texture)} />
+  const fileInputRef = useRef(null);
 
-        {/* Display the model scene if a texture is selected */}
-        {selectedTexture && (
-          <ModelScene
-            texturePath={selectedTexture}
-            onClose={() => setSelectedTexture(null)}
-          />
-        )}
+  // Handle texture upload
+  const handleTextureUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const textureURL = URL.createObjectURL(file);
+      setSelectedTexture(textureURL);
+    }
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
+
+  return (
+    <div className="hide-scrollbar flex flex-col min-h-screen py-10 items-center justify-center">
+      <h1 className="text-3xl font-bold mb-5 max-md:text-center max-md:px-5">
+        Select a Texture for Model
+      </h1>
+
+      <Gallery onSelect={(texture) => setSelectedTexture(texture)} />
+
+      <div className="mt-2">
+        <div
+          onClick={handleUploadClick}
+          className="cursor-pointer border-[1px] border-black font-medium hover:font-semibold  bg-slate-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition flex justify-center content-center items-center gap-x-3"
+        >
+          <p className="flex text-xl">Upload Texture </p><FaPlus />
+        </div>
+        <div className="text-center text-xs font-medium mt-2">jpg, jpeg, png etc.</div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleTextureUpload}
+        />
       </div>
+
+      {selectedTexture && (
+        <ModelScene
+          texturePath={selectedTexture}
+          onClose={() => setSelectedTexture(null)}
+        />
+      )}
     </div>
   );
 }
