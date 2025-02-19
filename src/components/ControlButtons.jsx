@@ -3,7 +3,7 @@ import { FaSync, FaArrowsAlt, FaExpandArrowsAlt, FaRedo } from "react-icons/fa";
 
 export default function ControlButtons({ showControls, setShowControls, controlMode, setControlMode, setResetTrigger }) {
   return (
-    <div className="absolute max-md:bottom-5 left-5 md:top-5 md:left-5 flex flex-wrap gap-2 md:gap-3 p-2 bg-black bg-opacity-30 rounded-lg">
+    <div className="absolute max-md:bottom-5 left-5 md:top-5 md:left-5 flex flex-wrap gap-2 md:gap-3 max-md:py-3 p-2 bg-black bg-opacity-30 rounded-lg">
       <button
         className={`px-3 py-1 md:px-4 md:py-2 text-xs md:text-sm flex items-center gap-2 rounded-full shadow-md text-white transition ${
           showControls ? "bg-red-500 hover:bg-red-600" : "bg-blue-500 hover:bg-blue-600"

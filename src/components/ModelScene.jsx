@@ -65,7 +65,7 @@ export default function ModelScene({ texturePath, onClose }) {
       />
 
       {/* 3D Model Canvas */}
-      <div className="w-[90vw] h-[80vh] bg-transparent rounded-lg p-2">
+      <div className="w-[90vw] max-lg:h-[60vh] lg:h-[80vh] bg-transparent rounded-lg p-2">
         <Canvas camera={{ position: [0, 0, 100] }} className="w-full h-full">
           <ResetCamera resetTrigger={resetTrigger} />
           <ambientLight intensity={0.5} />
